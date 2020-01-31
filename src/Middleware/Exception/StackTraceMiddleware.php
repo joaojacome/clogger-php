@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Clogger\Middleware;
+namespace Clogger\Middleware\Exception;
 
 use Clogger\MiddlewareInterface;
 
 class StackTraceMiddleware implements MiddlewareInterface
 {
     /**
-     * @param string $level
-     * @param mixed  $message
-     * @param array  $context
-     *
-     * @return array
+     * @param mixed $level
+     * @param mixed $message
      */
-    public function process($level, $message, $context): array
+    public function process($level, $message, array $context): array
     {
         if ($message instanceof \Throwable) {
             $context = array_merge($context, [

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Clogger\Middleware;
+namespace Clogger\Middleware\Context;
 
 use Clogger\ContextualInterface;
 use Clogger\MiddlewareInterface;
@@ -10,13 +10,10 @@ use Clogger\MiddlewareInterface;
 class ContextMiddleware implements MiddlewareInterface
 {
     /**
-     * @param string $level
-     * @param mixed  $message
-     * @param array  $context
-     *
-     * @return array
+     * @param mixed $level
+     * @param mixed $message
      */
-    public function process($level, $message, $context): array
+    public function process($level, $message, array $context): array
     {
         if ($message instanceof ContextualInterface) {
             $context = array_merge($context, $message->getContext());

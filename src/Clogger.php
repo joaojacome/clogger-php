@@ -27,12 +27,18 @@ class Clogger implements LoggerInterface
         $this->middlewares = $middlewares;
     }
 
+    public function addMiddleware(MiddlewareInterface $middleware): self
+    {
+        $this->middlewares[] = $middleware;
+
+        return $this;
+    }
+
     /**
      * @param mixed $level
      * @param mixed $message
-     * @param array $context
      */
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         foreach ($this->middlewares as $middleware) {
             [$message, $context] = $middleware->process($level, $message, $context);

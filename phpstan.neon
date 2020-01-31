@@ -1,0 +1,10 @@
+parameters:
+    level: 8
+    checkMissingIterableValueType: false
+    autoload_directories:
+        - %currentWorkingDirectory%/
+        - %currentWorkingDirectory%/tests
+    excludes_analyse:
+        - %currentWorkingDirectory%/vendor
+includes:
+    - vendor/jangregor/phpstan-prophecy/src/extension.neon

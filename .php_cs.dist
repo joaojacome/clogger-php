@@ -1,0 +1,23 @@
+<?php
+
+return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setRules([
+        '@Symfony' => true,
+        'compact_nullable_typehint' => true,
+        'declare_strict_types' => true,
+        'explicit_indirect_variable' => true,
+        'linebreak_after_opening_tag' => true,
+        'no_extra_consecutive_blank_lines' => true,
+        'no_useless_return' => true,
+        'ordered_imports' => true,
+        'psr4' => true,
+        'phpdoc_types_order' => [
+            'null_adjustment' => 'always_first'
+        ],
+    ])
+    ->setFinder(PhpCsFixer\Finder::create()
+        ->exclude('vendor')
+        ->in(__DIR__)
+    )
+;

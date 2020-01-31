@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Clogger\Middleware;
+namespace Clogger\Middleware\Exception;
 
 use Clogger\MiddlewareInterface;
 
 class ExceptionCodeMiddleware implements MiddlewareInterface
 {
     /**
-    * @param string $level
-    * @param mixed  $message
-    * @param array  $context
-    *
-    * @return array
-    */
-    public function process($level, $message, $context): array
+     * @param mixed $level
+     * @param mixed $message
+     */
+    public function process($level, $message, array $context): array
     {
         if ($message instanceof \Throwable) {
             $context = array_merge($context, [

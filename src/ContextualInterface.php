@@ -6,15 +6,5 @@ namespace Clogger;
 
 interface ContextualInterface
 {
-    /**
-     * @param mixed $context
-     *
-     * @return mixed
-     */
-    public function setContext($context);
-
-    /**
-     * @return mixed
-     */
-    public function getContext();
+    public function getContext(): array;
 }
