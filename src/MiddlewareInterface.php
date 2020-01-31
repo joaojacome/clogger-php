@@ -6,5 +6,9 @@ namespace Clogger;
 
 interface MiddlewareInterface
 {
-    public function process($level, $message, $context): array;
+    /**
+     * @param mixed $level
+     * @param mixed $message
+     */
+    public function process($level, $message, array $context): array;
 }
