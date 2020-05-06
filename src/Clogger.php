@@ -17,21 +17,14 @@ class Clogger implements LoggerInterface
     protected $logger;
 
     /**
-     * @var MiddlewareInterface[]
+     * @var MiddlewareInterface
      */
-    protected $middlewares = [];
+    protected $middleware;
 
-    public function __construct(LoggerInterface $logger, MiddlewareInterface ...$middlewares)
+    public function __construct(LoggerInterface $logger, MiddlewareInterface $middleware)
     {
         $this->logger = $logger;
-        $this->middlewares = $middlewares;
-    }
-
-    public function addMiddleware(MiddlewareInterface $middleware): self
-    {
-        $this->middlewares[] = $middleware;
-
-        return $this;
+        $this->middleware = $middleware;
     }
 
     /**
@@ -40,9 +33,7 @@ class Clogger implements LoggerInterface
      */
     public function log($level, $message, array $context = []): void
     {
-        foreach ($this->middlewares as $middleware) {
-            [$message, $context] = $middleware->process($level, $message, $context);
-        }
+        [$message, $context] = $this->middleware->process($level, $message, $context);
 
         $this->logger->log($level, $message, $context);
     }

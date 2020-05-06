@@ -6,10 +6,11 @@ namespace Clogger\Tests;
 
 use Clogger\Clogger;
 use Clogger\MiddlewareInterface;
+use Clogger\MiddlewareStack;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
-class CloggerTest extends TestCase
+class MiddlewareStackTest extends TestCase
 {
     public function testLog(): void
     {
@@ -17,13 +18,10 @@ class CloggerTest extends TestCase
         $message = 'comsimple message';
         $context = ['simple' => 'context'];
 
-        $logger = $this->prophesize(LoggerInterface::class);
-        $logger->log($level, $message, $context)->shouldBeCalled();
-
         $middleware = $this->prophesize(MiddlewareInterface::class);
         $middleware->process($level, $message, $context)->willReturn([$message, $context])->shouldBeCalled();
 
-        $clogger = new Clogger($logger->reveal(), $middleware->reveal());
-        $clogger->log($level, $message, $context);
+        $middlewareStack = new MiddlewareStack($middleware->reveal());
+        $middlewareStack->process($level, $message, $context);
     }
 }
