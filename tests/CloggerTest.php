@@ -21,7 +21,7 @@ class CloggerTest extends TestCase
         $logger->log($level, $message, $context)->shouldBeCalled();
 
         $middleware = $this->prophesize(MiddlewareInterface::class);
-        $middleware->process($level, $message, $context)->willReturn([$message, $context]);
+        $middleware->process($level, $message, $context)->willReturn([$message, $context])->shouldBeCalled();
 
         $clogger = new Clogger($logger->reveal(), $middleware->reveal());
         $clogger->log($level, $message, $context);
